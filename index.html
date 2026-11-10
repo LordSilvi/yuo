@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A través del universo ✨</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #030511;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* UNIVERSO */
+.space {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    background:
+      radial-gradient(ellipse at 20% 30%, #24164c 0%, transparent 45%),
+      radial-gradient(ellipse at 80% 70%, #172b54 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, #090d25 0%, #02030b 100%);
+}
+
+#stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .15; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1.5); }
+}
+
+/* NEBULOSAS */
+.nebula {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .17;
+    z-index: -2;
+    animation: float 12s infinite alternate ease-in-out;
+    pointer-events: none;
+}
+
+.n1 {
+    background: #8a48ff;
+    top: 10%;
+    left: -150px;
+}
+
+.n2 {
+    background: #347bff;
+    bottom: 0;
+    right: -150px;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    to { transform: translate(100px, -70px); }
+}
+
+/* CONTENEDOR */
+.container {
+    width: min(850px, 90%);
+    margin: auto;
+    padding: 75px 0;
+    text-align: center;
+}
+
+.subtitle {
+    color: #b7a5e9;
+    letter-spacing: 5px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(43px, 8vw, 76px);
+    font-weight: 400;
+    margin: 22px 0;
+    background: linear-gradient(90deg, #fff, #c8a9ff, #8fd7ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.intro {
+    color: #c4c3d5;
+    font-size: 14px;
+    line-height: 2;
+    max-width: 550px;
+    margin: auto;
+}
+
+/* BOTONES */
+button {
+    background: linear-gradient(120deg, #7655bd, #416eac);
+    border: 1px solid #a68be8;
+    color: white;
+    padding: 14px 30px;
+    border-radius: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: .4s;
+    margin-top: 30px;
+    box-shadow: 0 0 25px #8060c544;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 35px #9c7bff99;
+}
+
+button:active {
+    transform: scale(.94);
+}
+
+.rocket {
+    font-size: 55px;
+    display: block;
+    margin: 40px auto;
+    animation: travel 4s infinite ease-in-out;
+}
+
+@keyframes travel {
+    0%,100% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(-18px) rotate(10deg); }
+}
+
+/* CARTAS */
+.letter {
+    display: none;
+    margin: 65px auto 35px;
+    padding: 35px;
+    text-align: left;
+    border: 1px solid #8c75c566;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #15152bdd, #101c35dd);
+    box-shadow: 0 0 45px #6954b522;
+    backdrop-filter: blur(12px);
+    animation: appear 1.2s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.letter h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: #d7c1ff;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* CADA PÁRRAFO TIENE SU ASTRONAUTA */
+.letter-part {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    margin-bottom: 19px;
+}
+
+.letter-part:nth-of-type(even) {
+    flex-direction: row-reverse;
+}
+
+.letter-part p {
+    flex: 1;
+    min-width: 0;
+    color: #e0deed;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    line-height: 1.9;
+    margin: 0;
+}
+
+.astronaut {
+    flex: 0 0 38px;
+    width: 38px;
+    font-size: 29px;
+    line-height: 1.5;
+    text-align: center;
+    filter: drop-shadow(0 0 9px #a98cff);
+    animation: astronautFloat 3.5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.letter-part:nth-of-type(even) .astronaut {
+    animation-delay: -.9s;
+}
+
+@keyframes astronautFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(-9deg);
+    }
+    50% {
+        transform: translateY(-9px) rotate(9deg);
+    }
+}
+
+.signature {
+    text-align: right;
+    color: #c8a9ff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    font-style: italic;
+    margin-top: 25px;
+}
+
+/* PROGRESO */
+.progress {
+    width: 100%;
+    height: 3px;
+    background: #ffffff20;
+    margin: 30px 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #a36cff, #8edbff);
+    transition: 1s;
+}
+
+/* MÚSICA */
+.spotify {
+    margin: 35px auto;
+    overflow: hidden;
+    border-radius: 15px;
+    max-width: 550px;
+}
+
+.spotify iframe {
+    width: 100%;
+    height: 352px;
+    border: none;
+    border-radius: 15px;
+}
+
+/* FINAL */
+.final {
+    display: none;
+    margin-top: 50px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 29px;
+    color: #d9c5ff;
+    line-height: 1.6;
+    animation: appear 1.5s ease;
+}
+
+.footer {
+    color: #8888a8;
+    font-size: 11px;
+    margin-top: 60px;
+}
+
+/* EFECTOS MÁGICOS AL TOCAR LOS BOTONES */
+.magic-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    user-select: none;
+    animation: magicFloat 2.5s ease-out forwards;
+}
+
+@keyframes magicFloat {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(.3) rotate(0deg);
+    }
+    20% { opacity: 1; }
+    100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(1.8) rotate(180deg);
+    }
+}
+
+.galaxy-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    animation: galaxyFloat 4s ease-out forwards;
+    filter: drop-shadow(0 0 12px #b18aff);
+}
+
+@keyframes galaxyFloat {
+    0% {
+        opacity: 0;
+        transform: scale(.1) rotate(0deg);
+    }
+    25% { opacity: 1; }
+    100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(1.5) rotate(270deg);
+    }
+}
+
+@media(max-width:600px) {
+    .container { padding-top: 55px; }
+    .letter { padding: 22px 17px; }
+    .letter h2 { font-size: 29px; }
+    .letter-part { gap: 8px; }
+    .letter-part p { font-size: 19px; }
+    .astronaut {
+        flex-basis: 30px;
+        width: 30px;
+        font-size: 24px;
+    }
+    .final { font-size: 25px; }
+    .spotify iframe { height: 352px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="space"></div>
+<div id="stars"></div>
+<div class="nebula n1"></div>
+<div class="nebula n2"></div>
+
+<main class="container">
+
+    <div class="subtitle">Una pequeña travesía por el universo</div>
+
+    <h1>A través del universo</h1>
+
+    <p class="intro">
+        Dicen que el universo es infinito, que existen millones
+        de estrellas y galaxias por descubrir...
+        pero entre tantas cosas maravillosas, hay alguien
+        que siempre consigue llamar mi atención.
+    </p>
+
+    <!-- MÚSICA AL INICIO -->
+    <div id="music">
+        <h2 style="font-family:'Cormorant Garamond';
+                   font-weight:400;
+                   margin-top:35px;
+                   color:#d7c1ff">
+            Una melodía para acompañar este viaje 🎵
+        </h2>
+
+        <p class="intro">
+            Antes de comenzar, quiero que escuches esta canción.
+        </p>
+
+        <div class="spotify">
+            <iframe
+                src="https://open.spotify.com/embed/track/0FDzzruyVECATHXKHFs9eJ?utm_source=generator&theme=0&si=46439c70122b4949"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+
+    <span class="rocket">🚀</span>
+
+    <div id="start">
+        <p class="intro">
+            Mi destino no es una galaxia lejana,
+            simplemente es llegar un poquito más cerca de ti.
+        </p>
+
+        <button onclick="beginJourney()">
+            Comenzar nuestro viaje ✨
+        </button>
+    </div>
+
+    <div class="progress">
+        <div id="bar"></div>
+    </div>
+
+    <!-- PRIMERA CARTA -->
+    <section class="letter" id="letter1">
+
+        <h2>✦ Un mensaje desde mi universo ✦</h2>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                Aquí voy de nuevo, mi bella dama. Espero no molestar; solo le pido un instante de su tiempo para decirle lo que mi silencio ya no puede guardar.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                No vengo a prometerle el mundo. Vengo a decirle que, desde que la vi, el mundo me parece más bonito, más digno de ser vivido.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                Si me preguntaran qué me gusta de usted, no sabría por dónde empezar: si es la calma de su voz, la luz de su mirada o esa forma tan suya de hacer que todo lo demás se vuelva menos importante.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                Hay presencias que pasan y hay presencias que se quedan. Usted, sin tocarme, ya habita mis pensamientos.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                Quisiera ser el motivo de su sonrisa, no por obligación, sino porque de verdad le nazca sonreír. Quisiera ser la paz que encuentra cuando el día pesa, ser ese lugar donde usted pueda descansar sin tener que explicarse.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                No le hablo de amor porque el amor es muy poco para describir todo lo que quisiera expresarle. Hay sentimientos que simplemente no caben en unas cuantas palabras.
+            </p>
+        </div>
+
+        <div class="signature">
+            Con cariño, alguien que piensa en ti mi niña hermosa. ✨
+        </div>
+
+        <center>
+            <button onclick="nextLetter()">
+                Continuar el viaje 🌙
+            </button>
+        </center>
+
+    </section>
+
+    <!-- SEGUNDA CARTA -->
+    <section class="letter" id="letter2">
+
+        <h2>✦ Algo que también necesito decirte ✦</h2>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                Yo sé que últimamente no he tenido una actitud muy aceptable, y no quiero hacer como si eso no importara. Sé que también tengo cosas que mejorar, pero eso no significa que haya dejado de quererte, mi niña hermosa.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                También quisiera saber si algún día podremos demostrarnos ese cariño de una manera más clara y sincera. No quiero que sientas que tienes que hacer algo por obligación; simplemente me gustaría saber qué sientes tú y qué esperas de esta relación.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                A veces, por la manera en que te comportas conmigo, llego a pensar que quizá te estás aburriendo de lo que tenemos, o que poco a poco estás perdiendo las ganas de compartir esto conmigo.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                Tal vez me equivoque, y por eso prefiero decírtelo en lugar de quedarme imaginando respuestas.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                No espero que todo sea perfecto, porque sé que ninguno de los dos lo es. Solo quisiera que pudiéramos escucharnos, comprendernos y demostrar con pequeños detalles que todavía nos importa lo que estamos construyendo.
+            </p>
+        </div>
+
+        <div class="letter-part">
+            <span class="astronaut" aria-hidden="true">👨‍🚀</span>
+            <p>
+                Porque yo sí quiero seguir compartiendo momentos contigo, pero también quiero sentir que los dos estamos caminando en la misma dirección.
+            </p>
+        </div>
+
+        <div class="signature">
+            Porque lo que siento también merece ser escuchado. ❤️
+        </div>
+
+        <center>
+            <button onclick="finishJourney()">
+                Llegamos a nuestro destino 🌌
+            </button>
+        </center>
+
+    </section>
+
+    <!-- FINAL -->
+    <div class="final" id="final">
+        Y si tuviera que recorrer mil galaxias,
+        <br>
+        volvería a elegir el camino que me llevara hasta ti.
+        <br><br>
+        <span style="font-size:19px;color:#aaa6c9">
+            Porque entre tantas estrellas, hay una que hace
+            que mi universo sea diferente.
+        </span>
+        <br>
+        ✨🌙
+
+        <br><br>
+
+        <button onclick="specialMagic()">
+            Un último deseo para ti 💫
+        </button>
+    </div>
+
+    <div class="footer">
+        Hecho con cariño, bajo el mismo universo. ✦
+    </div>
+
+</main>
+
+<script>
+// CREAR ESTRELLAS
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 180; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+
+    const size = Math.random() * 3 + 1;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.setProperty("--duration", (Math.random() * 3 + 2) + "s");
+
+    stars.appendChild(star);
+}
+
+// NAVEGACIÓN DEL VIAJE
+function beginJourney() {
+    document.getElementById("start").style.display = "none";
+    document.getElementById("letter1").style.display = "block";
+    document.getElementById("bar").style.width = "33%";
+
+    document.getElementById("letter1").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+function nextLetter() {
+    document.getElementById("letter1").style.display = "none";
+    document.getElementById("letter2").style.display = "block";
+    document.getElementById("bar").style.width = "70%";
+
+    document.getElementById("letter2").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+function finishJourney() {
+    document.getElementById("letter2").style.display = "none";
+    document.getElementById("final").style.display = "block";
+    document.getElementById("bar").style.width = "100%";
+
+    document.getElementById("final").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+// ESTRELLAS Y GALAXIAS AL TOCAR LOS BOTONES
+function createMagic(event) {
+    const x = event.clientX;
+    const y = event.clientY;
+
+    const particles = ["✨", "⭐", "🌟", "💫", "🌌", "✦"];
+
+    for (let i = 0; i < 18; i++) {
+        const particle = document.createElement("span");
+        particle.className = "magic-particle";
+        particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+
+        particle.style.left = x + "px";
+        particle.style.top = y + "px";
+        particle.style.fontSize = (12 + Math.random() * 20) + "px";
+
+        particle.style.setProperty("--x", (Math.random() - 0.5) * 300 + "px");
+        particle.style.setProperty("--y", (Math.random() - 0.5) * 300 + "px");
+
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 2600);
+    }
+
+    // PEQUEÑAS GALAXIAS
+    for (let i = 0; i < 3; i++) {
+        const galaxy = document.createElement("span");
+        galaxy.className = "galaxy-particle";
+        galaxy.textContent = "🌌";
+
+        galaxy.style.left = x + "px";
+        galaxy.style.top = y + "px";
+        galaxy.style.fontSize = (20 + Math.random() * 15) + "px";
+
+        galaxy.style.setProperty("--x", (Math.random() - 0.5) * 250 + "px");
+        galaxy.style.setProperty("--y", (Math.random() - 0.5) * 250 + "px");
+
+        document.body.appendChild(galaxy);
+        setTimeout(() => galaxy.remove(), 4100);
+    }
+}
+
+// ACTIVAR EFECTOS EN TODOS LOS BOTONES
+document.querySelectorAll("button").forEach(button => {
+    button.addEventListener("click", createMagic);
+});
+
+// EFECTO ESPECIAL FINAL
+function specialMagic() {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    for (let i = 0; i < 5; i++) {
+        createMagic({
+            clientX: centerX + (Math.random() - 0.5) * 150,
+            clientY: centerY + (Math.random() - 0.5) * 150
+        });
+    }
+}
+</script>
+
+</body>
+</html>
